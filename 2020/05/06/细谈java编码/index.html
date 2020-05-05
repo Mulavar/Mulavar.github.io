@@ -79,11 +79,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lam">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="基础概念我们经常提到的关于编码的概念可以粗略划分为两类：  字符集：将一个字符映射为某个唯一的数字（码值），如字符A在ascii码中映射为65 字符编码：将字符集用程序（字节）表示的一套规则，可以认为字符编码是字符集在计算机上的一种实现方式，如utf-8和utf-16都是unicode码的实现方式。  Unicode字符集介绍Unicode字符集一开始提出的时候，认为码值范围为0-65535（0-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细谈java编码">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/%E7%BB%86%E8%B0%88java%E7%BC%96%E7%A0%81/index.html">
 <meta property="og:site_name" content="Lam">
+<meta property="og:description" content="基础概念我们经常提到的关于编码的概念可以粗略划分为两类：  字符集：将一个字符映射为某个唯一的数字（码值），如字符A在ascii码中映射为65 字符编码：将字符集用程序（字节）表示的一套规则，可以认为字符编码是字符集在计算机上的一种实现方式，如utf-8和utf-16都是unicode码的实现方式。  Unicode字符集介绍Unicode字符集一开始提出的时候，认为码值范围为0-65535（0-">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-05T17:11:14.837Z">
 <meta property="article:author" content="lam">
 <meta name="twitter:card" content="summary">
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/06/细谈java编码/"/>
 
 
 
 
 
-  <title>Lam</title>
+  <title>细谈java编码 | Lam</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,9 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -256,9 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/06/%E7%BB%86%E8%B0%88java%E7%BC%96%E7%A0%81/" itemprop="url">细谈java编码</a></h1>
+          <h1 class="post-title" itemprop="name headline">细谈java编码</h1>
         
 
         <div class="post-meta">
@@ -341,9 +342,7 @@
       
 
       
-        
-          
-            <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>我们经常提到的关于编码的概念可以粗略划分为两类：</p>
+        <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>我们经常提到的关于编码的概念可以粗略划分为两类：</p>
 <ul>
 <li>字符集：将一个字符映射为某个唯一的数字（码值），如字符A在ascii码中映射为65</li>
 <li>字符编码：将字符集用程序（字节）表示的一套规则，可以认为字符编码是字符集在计算机上的一种实现方式，如utf-8和utf-16都是unicode码的实现方式。</li>
@@ -427,8 +426,6 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单做个总结，java虚拟机对字符串的表示或处理很多都是使用的UTF-16编码或MUTF-8编码，而UTF-8编码一般是显式通过Java API层的<code>String.getBytes(&quot;UTF-8&quot;)</code>函数得到。</p>
 <p>平时使用时，如果只用Java语言开发一般不会有什么乱码问题，但如果自己想手动实现一个Java虚拟机，或是要通过JNI做一些事情的时候，就需要去了解一下Java的这些编码知识了。如笔者之前参与的项目，用go处理Java虚拟机的编码问题就很头大，因为Go这边默认使用的是UTF-8编码，所以如果在实现常量池的过程中用Go的string去存储java.lang.String的实际内容，则可能出现一些奇怪的乱码问题。</p>
 
-          
-        
       
     </div>
     
@@ -445,12 +442,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -460,10 +457,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -471,6 +469,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -491,8 +493,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -543,6 +554,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础概念"><span class="nav-number">1.</span> <span class="nav-text">基础概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode字符集介绍"><span class="nav-number">2.</span> <span class="nav-text">Unicode字符集介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8编码介绍"><span class="nav-number">3.</span> <span class="nav-text">UTF-8编码介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-16编码介绍"><span class="nav-number">4.</span> <span class="nav-text">UTF-16编码介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MUTF-8编码介绍"><span class="nav-number">5.</span> <span class="nav-text">MUTF-8编码介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java的内码与外码"><span class="nav-number">6.</span> <span class="nav-text">Java的内码与外码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -683,6 +710,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

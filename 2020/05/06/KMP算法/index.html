@@ -79,11 +79,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lam">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="基本介绍KMP算法针对的场景可以简单概括为：确定模式串pattern是否是文本串text的子串，换句话讲，text是否包含pattern字符串。 KMP算法是先遍历pattern串获取一些有用信息，根据这些信息构造一个数组next，用来标记每次比较失败后下次需要比较的位置。 在KMP算法以前，假设我们想要判断模式串pattern是否是文本串text的子串，一般步骤如下：  使用两个指针i、j分别标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="细谈KMP算法">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/KMP%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Lam">
+<meta property="og:description" content="基本介绍KMP算法针对的场景可以简单概括为：确定模式串pattern是否是文本串text的子串，换句话讲，text是否包含pattern字符串。 KMP算法是先遍历pattern串获取一些有用信息，根据这些信息构造一个数组next，用来标记每次比较失败后下次需要比较的位置。 在KMP算法以前，假设我们想要判断模式串pattern是否是文本串text的子串，一般步骤如下：  使用两个指针i、j分别标">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-05-06T17:47:40.391Z">
 <meta property="article:author" content="lam">
 <meta name="twitter:card" content="summary">
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/05/06/KMP算法/"/>
 
 
 
 
 
-  <title>Lam</title>
+  <title>细谈KMP算法 | Lam</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,244 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/%E7%BB%86%E8%B0%88java%E7%BC%96%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lam">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lam">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/06/%E7%BB%86%E8%B0%88java%E7%BC%96%E7%A0%81/" itemprop="url">细谈java编码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T00:00:00+08:00">
-                2020-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>我们经常提到的关于编码的概念可以粗略划分为两类：</p>
-<ul>
-<li>字符集：将一个字符映射为某个唯一的数字（码值），如字符A在ascii码中映射为65</li>
-<li>字符编码：将字符集用程序（字节）表示的一套规则，可以认为字符编码是字符集在计算机上的一种实现方式，如utf-8和utf-16都是unicode码的实现方式。</li>
-</ul>
-<h2 id="Unicode字符集介绍"><a href="#Unicode字符集介绍" class="headerlink" title="Unicode字符集介绍"></a>Unicode字符集介绍</h2><p>Unicode字符集一开始提出的时候，认为码值范围为0-65535（0-FFFF，这一段区域也被称为Basic Multilingual Plane, 简称<strong>BMP</strong>）就可以表示所有的字符，但随着时代发展，0-FFFF也不够容纳所有字符，因此<strong>Unicode划出了一个代理区：D800-DFFF， Unicode标准规定U+D800 - U+DFFF的值不对应于任何字符</strong>。这也是为什么有些人说：有些字符需要用两个Unicode字符去表示的原因。</p>
-<p>目前Unicode的编码空间为0-10FFFF，根据第一段落可以得知，当某个字符的Unicode码值落在0-FFFF时，则只用一个Unicode字符即可表示，否则就会用两个。</p>
-<h2 id="UTF-8编码介绍"><a href="#UTF-8编码介绍" class="headerlink" title="UTF-8编码介绍"></a>UTF-8编码介绍</h2><p>Utf8全称为8-bit Unicode Transformation Format，是一种针对Unicode字符集的可变长编码，不同的Unicode码点会使用不同的字节数去存储，如ascii码（都小于128）则会使用1个字节去存储，一些常用字符（如部分中文）会使用2-3个字节去存储，这有一些优势，首先对于ascii码完全兼容，且对于某些场景（只存在ascii码）编码后占用空间少，缺点也很明显，当遇到的都是需要占用3个字节存储的Unicode码点时，则会耗费更大的空间。</p>
-<p>utf8编码的基本规则如下：</p>
-<table>
-<thead>
-<tr>
-<th>Unicode码范围</th>
-<th>Utf-8编码格式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0x0000-0x00FF（0-127）</td>
-<td>0xxxxxxx</td>
-</tr>
-<tr>
-<td>0x0080-0x07FF（128-2047）</td>
-<td>110xxxxx 10xxxxxx</td>
-</tr>
-<tr>
-<td>0x0800-0xFFFF（2048-65535）</td>
-<td>1110xxxx 10xxxxxx 10xxxxxx</td>
-</tr>
-<tr>
-<td>0x10000-0X10FFFF</td>
-<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
-</tr>
-</tbody></table>
-<p>首先将Unicode码用二进制表示，然后根据<strong>其所属的Unicode范围对应的Utf-8编码格式</strong>截取最后几位。</p>
-<p>如0x0000-0x00FF对应的Utf-8编码格式是0xxxxxxx，则截取最后7位（<strong>有效表示位其实也只有7位，因为首位一定是0</strong>），对应填到x中。</p>
-<p>同理，0x0080-0x07FF（0000 0000 1000 0000 — 0000 0111 1111 1111），则截取后11位（<strong>有效表示位其实只有11位，因为从右往左第12位一定是0</strong>），对应填到x中。</p>
-<p>0x0080-0xFFFF（0000 1000 0000 0000 — 1111 1111 1111 1111），截取后15位（<strong>有效表示位其实只有11位，因为从右往左第16位一定是0</strong>），对应填到x中。</p>
-<p>0x100000-0X10FFFF（0000 0001 0000 0000 0000 — 0001 0000 1111 1111 1111 1111），截取后21位（<strong>有效表示位其实只有21位，从右往左第22位一定是0</strong>），对应填到x中。</p>
-<p>因此，我们可以得到所有Unicode的Utf8编码规则。</p>
-<h2 id="UTF-16编码介绍"><a href="#UTF-16编码介绍" class="headerlink" title="UTF-16编码介绍"></a>UTF-16编码介绍</h2><p>在Unicode字符集中讲到，Unicode字符集存在一个拓展区域：<strong>D800-DFFF</strong>，用于表示码点在0x10000-0x10FFFF范围的字符。当碰到某个在该范围内的Utf-16字符，需要再读一个Utf-16字符，将两个Utf-16字符组合表示一个Unicode字符。</p>
-<table>
-<thead>
-<tr>
-<th>Unicode码范围</th>
-<th>Utf-16编码格式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0x0000-0xFFFF（0-65535）</td>
-<td>使用2个字节存储</td>
-</tr>
-<tr>
-<td>0x10000-0x10FFFF（65536-）</td>
-<td>使用4个字节存储，需要利用上述提到的代理区</td>
-</tr>
-</tbody></table>
-<p>接下来将Unicode码用二进制表示，尝试将它用Utf-16编码格式进行编码。</p>
-<p>对应0x0000-0xFFFF范围的Unicode码，直接将这16为对应填入两个字节（恰好16位）就可以得到Utf-16编码。</p>
-<p>而对应0x10000-0x10FFFF的Unicode码，需要有一些特殊处理：</p>
-<ol>
-<li>取后20位（减去10000），将这20位数字分为高10位和低10位，<strong>高、低10位的范围即为0-0x3FF（00 0000 0000 — 11 1111 1111）</strong>；</li>
-<li>将高位加上0xD800，得到值范围为0xD800—0xDBFF，将低位加上0xDC00，得到值范围为0xDC00—0xDFFF；</li>
-<li>将高位处理后的值（又称<strong>前导代理</strong>）放在前2个字节中，将低位处理后的值（<strong>后导代理</strong>）放在后2个字节中。</li>
-</ol>
-<p>通过处理，前导代理和后导代理恰好占满了0xD800—0xDFFF这一段代理区域，这样处理的一个优点在于，看到每一个Utf-16编码，可以很清楚地确定它是属于前导代理、后导代理还是除此以外的BMP区域中的Unicode。</p>
-<h2 id="MUTF-8编码介绍"><a href="#MUTF-8编码介绍" class="headerlink" title="MUTF-8编码介绍"></a>MUTF-8编码介绍</h2><p>MUTF-8（Modified UTF-8）编码，可以认为是对UTF-16编码的再编码。它的编码方式与UTF-8编码非常相似，只需要记住某些不同的情况，其他都与UTF-8编码一致。</p>
-<p>具体的不同情况有二：</p>
-<ol>
-<li>对于Unicode的0码点，UTF-8直接使用1个字节去存储（0000 0000），而MUTF-8会使用2个字节去存储，最后存储的值为0xC080（1100 0000 1000 0000）。</li>
-<li>对于0x10000-0x10FFFF这块区域的Unicode码，之前提过UTF-8是使用4个字节去存储，而MUTF-8是对UTF-16的再编码，所以<strong>MUTF-8是对UTF-16编码的两个字符分别用3个字节去编码（因为这段区域的Unicode码值转为UTF-16编码后前导代理和后导代理的范围是0xD800—0xDFFF，明显大于0x0800），共需要6个字节</strong>。</li>
-</ol>
-<p>所以网上经常会提到UTF-8编码，又提到用1—6个字节去编码，其实说的是MUTF-8编码。</p>
-<h2 id="Java的内码与外码"><a href="#Java的内码与外码" class="headerlink" title="Java的内码与外码"></a>Java的内码与外码</h2><p>Java的内码是UTF-16，外码是MUTF-8。那什么是内码和外码呢？</p>
-<p>内码：程序内部使用的字符编码，如java的char，所以java的char是2字节16位；</p>
-<p>外码：程序外部交互时使用的字符编码，如class文件。</p>
-<p>在深入理解Java虚拟机第三版6.3.2节中，我们可以得知其实Java的字符串常量（如String str=”hello world”）都是以CONSTANT_Utf8_info类型存在常量池中的，class文件的编码是MUTF-8，所以CONSTANT_Utf8_info中存储的根据不同的实现一般是存储MUTF-8字节数组或UTF-16字符数组，每次<strong>构建时java.lang.String对象时，需要通过MUTF-8=&gt;UTF-16的一个编码转换将外码转为内码</strong>，再将其塞到char数组（value）中。</p>
-<p>在Java API层对字符串的操作，其实一般也是对UTF-16字符的操作，如charAt函数：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">charAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((index &lt; <span class="number">0</span>) || (index &gt;= value.length)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> StringIndexOutOfBoundsException(index);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> value[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>charAt函数实际是返回了一个char，所以是返回了一个UTF-16字符，它不一定是一个完整的Unicode码点。</p>
-<p>当然，在Java API层也可以使用getBytes(”UTF-8”)则是返回UTF-8编码的字节数组。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单做个总结，java虚拟机对字符串的表示或处理很多都是使用的UTF-16编码或MUTF-8编码，而UTF-8编码一般是显式通过Java API层的<code>String.getBytes(&quot;UTF-8&quot;)</code>函数得到。</p>
-<p>平时使用时，如果只用Java语言开发一般不会有什么乱码问题，但如果自己想手动实现一个Java虚拟机，或是要通过JNI做一些事情的时候，就需要去了解一下Java的这些编码知识了。如笔者之前参与的项目，用go处理Java虚拟机的编码问题就很头大，因为Go这边默认使用的是UTF-8编码，所以如果在实现常量池的过程中用Go的string去存储java.lang.String的实际内容，则可能出现一些奇怪的乱码问题。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -491,9 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/06/KMP%E7%AE%97%E6%B3%95/" itemprop="url">细谈KMP算法</a></h1>
+          <h1 class="post-title" itemprop="name headline">细谈KMP算法</h1>
         
 
         <div class="post-meta">
@@ -565,9 +331,7 @@
       
 
       
-        
-          
-            <h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>KMP算法针对的场景可以简单概括为：确定模式串pattern是否是文本串text的子串，换句话讲，text是否包含pattern字符串。</p>
+        <h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>KMP算法针对的场景可以简单概括为：确定模式串pattern是否是文本串text的子串，换句话讲，text是否包含pattern字符串。</p>
 <p>KMP算法是先遍历pattern串获取一些有用信息，根据这些信息构造一个数组next，用来标记每次比较失败后下次需要比较的位置。</p>
 <p>在KMP算法以前，假设我们想要判断模式串pattern是否是文本串text的子串，一般步骤如下：</p>
 <ol>
@@ -721,8 +485,6 @@
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>KMP算法最早接触是在准备考研的时候，由于没有打过ACM算法基础不扎实，当时被KMP困扰了许久，最近想起觉得这是个很有趣的算法，而且网上很多资料只是介绍了KMP算法的流程却没有对其正确性的说明，且流程说明有时也过度繁琐复杂，因此笔者写下了这篇博客，在简单的流程说明后面又添加了对KMP算法正确性的证明。</p>
 <p>关于KMP算法其实有挺多有趣的值得探讨的地方，next数组的计算可以用dp的思想去做，这样只遍历模式串一次就可以得到，而根据next数组跳转又有一点贪心算法的思想在里面，且KMP算法的正确性证明如何得到，这都是值得思考的问题。这里提出另外一个小问题，由于笔者时间有限就没有去研究，希望读者看到后能去再进一步思考一下，为什么KMP的时间复杂度是O(m+n)，在上述文章中可以看出，模式串的下标是有回退的，在这个前提下如何证明KMP的时间复杂度笔者认为是个有趣的问题。</p>
 
-          
-        
       
     </div>
     
@@ -739,12 +501,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/06/%E7%BB%86%E8%B0%88java%E7%BC%96%E7%A0%81/" rel="prev" title="细谈java编码">
+                细谈java编码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -754,10 +532,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -765,6 +544,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -785,8 +568,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -837,6 +629,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法原理"><span class="nav-number">3.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -977,6 +785,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
